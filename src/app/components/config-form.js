@@ -53,6 +53,7 @@ module.exports = React.createClass({
 
     handleChangeIsLocal: function (event) {
         const isLocal = event.target.value == 'true';
+
         this.setState({isLocal: isLocal});
         navigationActions.changeIsLocal(isLocal);
     },

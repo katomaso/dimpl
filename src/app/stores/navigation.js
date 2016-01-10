@@ -98,7 +98,7 @@ NavigationStore.dispatchToken = dispatcher.register(function (action) {
 
         case constants.actions.CHANGE_IS_LOCAL:
             store.isLocal = action.text;
-            store.currentUrl = '';
+            store.currentUrl = store.isLocal ? '' : store.baseUrl;
             NavigationStore.emitChange();
             break;
 

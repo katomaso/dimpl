@@ -20,7 +20,6 @@ if (typeof chrome == 'undefined') {
 
 fileSystem.init(fsProvider);
 
-Promise.all([navigationStore.init(storeProvider), playerStore.init(storeProvider)])
-    .then(function () {
-        ReactDOM.render(<App />, document.getElementById('app'));
-    });
+Promise.all([navigationStore.init(storeProvider), playerStore.init(storeProvider)]).then(function () {
+    ReactDOM.render(<App />, document.getElementById('app'));
+});

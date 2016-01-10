@@ -3,7 +3,7 @@
 }
 
 .navigation-list:empty::after {
-    content: '[no media files or directories]';
+    content: '[no supported media files or directories]';
     color: #666;
 }
 

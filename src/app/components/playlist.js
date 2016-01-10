@@ -41,7 +41,6 @@ module.exports = React.createClass({
         this.onKey('t', this.handleShuffle);
         this.onKey('x', this._removeCurrentIndex);
         this.onKey('x', this.handleClearPlaylist, {ctrl: true});
-
         this.onKey(KEYS.LEFT, this._seek.bind(this, -1));
         this.onKey(KEYS.LEFT, this._seek.bind(this, -10), {ctrl: true});
         this.onKey(KEYS.LEFT, this._seekTop, {alt: true});

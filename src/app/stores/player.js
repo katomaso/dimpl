@@ -12,7 +12,6 @@ const store = {
     // mediaUrl is maintained separately from playlist+playlistIndex because
     // clearing the playlist shouldn't clear the mediaUrl.
     mediaUrl: '',
-    // Immutable.
     playlist: [],
     playlistIndex: -1
 };

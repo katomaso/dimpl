@@ -63,21 +63,20 @@ module.exports = React.createClass({
     },
 
     handleSubmit: function (event) {
-        const state = this.state;
-        let baseUrl = state.baseUrl.trim();
+        const baseUrl = this.state.baseUrl.trim();
         const initialRegexes = this.props.regexes;
 
         event.preventDefault();
 
-        const regexes = utils.compact(state.regexes.map(function (regex, i) {
+        const regexes = utils.compact(this.state.regexes.map(function (regex, i) {
             regex = regex.trim();
             try {
                 new RegExp(regex); // Validate and discard the result.
             } catch (e) {
                 // Reset if the regex is invalid.
-                regex = initialRegexes[i] || '';
+                regex = initialRegexes[i];
             }
-            return regex;
+            return regex || null;
         }));
 
         this.setState({baseUrl: baseUrl, regexes: regexes});
@@ -147,7 +146,7 @@ module.exports = React.createClass({
                 </p>
 
                 <RegexFieldset
-                    onChange={this.handleChangeRegexes}
+                    handleChangeRegexes={this.handleChangeRegexes}
                     regexes={this.state.regexes}/>
                 <p className="config-form__controls">
                     <button type="submit">Save</button>

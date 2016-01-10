@@ -1,0 +1,32 @@
+{
+  "app": {
+    "background": {
+      "scripts": [
+        "chrome.js"
+      ],
+      "persistent": false
+    }
+  },
+  "author": "andornaut",
+  "description": "Stream music from your web server or local media library.",
+  "icons": {
+    "16": "assets/img/icon16.png",
+    "128": "assets/img/icon128.png"
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "42",
+  "name": "Directory Index Media Player",
+  "permissions": [
+    "storage",
+    "http://*/",
+    "https://*/",
+    {
+      "fileSystem": [
+        "directory",
+        "retainEntries"
+      ]
+    }
+  ],
+  "short_name": "DIMPL",
+  "version": "0.5.0"
+}

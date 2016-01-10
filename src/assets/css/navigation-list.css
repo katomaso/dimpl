@@ -1,0 +1,40 @@
+.navigation-list:empty {
+    text-align: center;
+}
+
+.navigation-list:empty::after {
+    content: '[no media files or directories]';
+    color: #666;
+}
+
+.navigation-list__item {
+    padding-bottom: 4px;
+    padding-top: 4px;
+    padding-left: 20px;
+}
+
+.navigation-list__item.is-selected {
+    background: #c0c0c0;
+    padding-left: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.navigation-loading {
+    animation: spin 1s infinite linear;
+    border: 8px solid #c0c0c0;
+    border-left-color: transparent;
+    border-radius: 50%;
+    height: 12px;
+    margin: auto;
+    width: 12px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

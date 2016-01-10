@@ -93,12 +93,12 @@ s or t|Toggle shuffle.
 DIMPL can also be built into an [Electron][electron] package and then installed as a standalone application.
 
 ```
-$ npm install && gulp dist-electron && ls dist/*/ -1 |grep zip
-dimpl-0.4.1-darwin-x64.zip
-dimpl-0.4.1-linux-ia32.zip
-dimpl-0.4.1-linux-x64.zip
-dimpl-0.4.1-win32-ia32.zip
-dimpl-0.4.1-win32-x64.zip
+$ npm install && gulp distElectron && ls dist/ -1
+dimpl-darwin-x64.zip
+dimpl-linux-ia32.zip
+dimpl-linux-x64.zip
+dimpl-win32-ia32.zip
+dimpl-win32-x64.zip
 ```
 
 Each of these zip archives contains an executable named either dimpl (linux), Dimpl.app (mac) or dimpl.exe (windows).
@@ -108,22 +108,32 @@ You can also download pre-built packages from the [releases page][releases].
 ## FAQ
 
 <dl>
-  <dt><em>Can I make my media directory more private?</em></dt>
-  <dd>You can use <a href="http://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic Authentication</a> over 
-  SSL to secure your media directory. You can include your login credentials in the "Directory index web-address" field in DIMPL. eg.``https://USER:PASSWORD@example.com/media``</dd>
-  
   <dt><em>What audio formats are supported?</em></dt>
   <dd>.aac, .mp3, .oga, .ogg, .opus, .wav, .weba</dd>
 
   <dt><em>What video codecs are supported?</em></dt>
   <dd>.ogv (Ogg Theora), .mp4 (H.264), .webm (vp8/vp9)</dd>
-  
-  <dt><em>Is there any way to play other audio formats such as FLAC?</em>
-  <dd>You can use the <a href="https://github.com/khenriks/mp3fs">mp3fs FUSE filesystem</a> to transcode FLAC to MP3 on 
-  the fly.</em>
-  
-  <dt><em>What internet protocols are supported?</em>
+
+  <dt><em>What internet protocols are supported?</em></dt>
   <dd>HTTP and HTTPS</dd>
+
+  <dt><em>Can I make my media directory more private?</em></dt>
+  <dd>You can use <a href="http://en.wikipedia.org/wiki/Basic_access_authentication">HTTP Basic Authentication</a> over
+  SSL to secure your media directory. You can include your login credentials in the "Directory index web-address" field
+  in DIMPL. eg.``https://USER:PASSWORD@example.com/media``</dd>
+
+  <dt><em>Is there any way to play other audio formats such as FLAC?</em></dt>
+  <dd>You can use the <a href="https://github.com/khenriks/mp3fs">mp3fs FUSE filesystem</a> to transcode FLAC to MP3 on
+  the fly.</dd>
+
+  <dt><em>What are the regular expressions used for?</em></dt>
+  <dd>The regular expressions are used to extract metadata such as artist, album and song names from filenames. This is
+  used to display nicer titles in the playlist (the pane on the right side). By default, DIMPL displays the filename
+  without the file extension, but you can add more elaborate regular expressions such as this one:
+  <pre>^.*/([^\/.]+)\/(?:['_\s\d\w]+[_\s]*-[_\s]*)+([^\/.]+)\/(?:\d+[_\s]*-?[_\s]*)?([^\/.]+)\.\w+$</pre></dd>
+
+  <dt><em>Can I use DIMPL without Chrome?</em>
+  <dd>Yes, you can install one of the <a href="https://github.com/andornaut/dimpl/releases">standalone releases</a>.</dd>
 </dl>
 
 ## Contributing

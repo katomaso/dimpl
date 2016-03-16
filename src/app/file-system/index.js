@@ -1,6 +1,7 @@
 'use strict';
 
 const utils = require('../utils');
+const superagent = require('superagent');
 
 let _provider;
 
@@ -37,22 +38,6 @@ module.exports = {
         const ADD_SLASH = !currentUrl.endsWith('/');
         const IGNORED_LINK_NAMES = ['parent directory', 'name', 'last modified', 'size', 'description'];
 
-        function status(response) {
-            if (200 <= response.status < 300) {
-                return Promise.resolve(response)
-            } else {
-                return Promise.reject(new Error(response.statusText))
-            }
-        }
-
-        function html(response) {
-            return response.text();
-        }
-
-        function links(text) {
-            return utils.compact(toAnchors(text).map(toLink));
-        }
-
         function toAnchors(text) {
             return Array.from((new DOMParser()).parseFromString(text, 'text/html').getElementsByTagName('a'));
         }
@@ -70,7 +55,15 @@ module.exports = {
             }
         }
 
-        return fetch(currentUrl, {credentials: 'include', mode: 'cors'}).then(status).then(html).then(links);
+        // Use superagent instead of the native fetch api because the latter fails in Chrome 49 with the following
+        // error when used with http basic authentication:
+        //  http basic auth: Failed to execute 'fetch' on 'Window': Request cannot be constructed from a URL that
+        //  includes credentials
+        return new Promise(function(resolve) {
+            superagent.get(currentUrl).end(function(error, response) {
+                resolve(error ? [] : utils.compact(toAnchors(response.text).map(toLink)));
+            });
+        });
     },
 
     makeUrl: function (url, baseEntry) {
